@@ -10,9 +10,11 @@ jobs:
     name: 'Bump version and commit package.json'
     runs-on: ubuntu-latest
     if: |
-      github.event.pull_request.merged == true &&
-      startsWith(github.event.head_commit.message, '[npm release]')
+      github.event.pull_request.merged == true
     steps:
+      - name: Dump GitHub context
+        id: github_context_step
+        run: echo '${{ toJSON(github) }}'
       - name: 'Checkout source code'
         uses: 'actions/checkout@v2'
 
