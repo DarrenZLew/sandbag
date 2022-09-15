@@ -2,14 +2,17 @@
 name: npm publish based on commit msg
 on: 
   workflow_call:
-    branches:
-    - 'develop'
+
 jobs:
   build:
     name: 'npm publish'
     runs-on: ubuntu-latest
-    if: "startsWith(github.event.head_commit.message, '[npm release]')"
+    # if: "startsWith(github.event.head_commit.message, '[npm release]')"
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: 'Checkout source code'
         uses: 'actions/checkout@v2'
 
