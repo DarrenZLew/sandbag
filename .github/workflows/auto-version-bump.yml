@@ -12,9 +12,6 @@ jobs:
     if: |
       github.event.pull_request.merged == true
     steps:
-      - name: Dump GitHub context
-        id: github_context_step
-        run: echo '${{ toJSON(github) }}'
       - name: 'Checkout source code'
         uses: 'actions/checkout@v2'
 
@@ -27,3 +24,6 @@ jobs:
           patch-wording: '[npm release]'
           tag-prefix:  'v'
           target-branch: 'develop'
+  call-npm-publish-workflow:
+    needs: build
+    uses: ./.github/workflows/npm-publish.yml
