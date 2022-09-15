@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     if: |
       github.event.pull_request.merged == true &&
-      !contains(github.event.head_commit.message, 'skip ci') &&
       startsWith(github.event.head_commit.message, '[npm release]')
     steps:
       - name: 'Checkout source code'
