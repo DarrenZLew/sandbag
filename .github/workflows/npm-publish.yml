@@ -14,7 +14,9 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
       - name: 'Checkout source code'
-        uses: 'actions/checkout@v2'
+        uses: 'actions/checkout@v3'
+        with:
+          ref: develop
 
       - name: 'Show current version'
         run: grep  '"version"' package.json
