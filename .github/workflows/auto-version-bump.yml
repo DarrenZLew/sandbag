@@ -26,4 +26,5 @@ jobs:
           target-branch: 'develop'
   call-npm-publish-workflow:
     needs: build
+    if: "startsWith(github.event.pull_request.title, '[npm release]')"
     uses: ./.github/workflows/npm-publish.yml
