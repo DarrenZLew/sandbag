@@ -10,7 +10,8 @@ jobs:
     name: 'Bump version and commit package.json'
     runs-on: ubuntu-latest
     if: |
-      github.event.pull_request.merged == true
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.title, '[npm release]')
     steps:
       - name: Dump GitHub context
         id: github_context_step
