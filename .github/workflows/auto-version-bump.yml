@@ -13,7 +13,9 @@ jobs:
       github.event.pull_request.merged == true
     steps:
       - name: 'Checkout source code'
-        uses: 'actions/checkout@v2'
+        uses: 'actions/checkout@v3'
+        token: ${{ secrets.BOT_USER_TOKEN }}
+        ref: 'develop'
 
       - name:  'Automated Version Bump'
         id: version-bump
