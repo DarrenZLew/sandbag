@@ -14,8 +14,9 @@ jobs:
     steps:
       - name: 'Checkout source code'
         uses: 'actions/checkout@v3'
-        token: ${{ secrets.BOT_USER_TOKEN }}
-        ref: 'develop'
+        with:
+          token: ${{ secrets.BOT_USER_TOKEN }}
+          ref: 'develop'
 
       - name:  'Automated Version Bump'
         id: version-bump
