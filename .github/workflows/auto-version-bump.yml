@@ -1,6 +1,7 @@
 name: Auto tag based on commit msg
 on:   
-  push:
+  pull_request:
+    types: [ closed ]
     branches: ['develop']
 
 jobs:
@@ -9,11 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
       - name: 'Checkout source code'
         uses: 'actions/checkout@v3'
         with:
@@ -31,5 +27,5 @@ jobs:
           target-branch: 'develop'
   call-npm-publish-workflow:
     needs: build
-    if: "startsWith(github.event.pull_request.title, '[npm release]')"
+    if: "startsWith(github.event.head_commit.message, '[npm release]')"
     uses: ./.github/workflows/npm-publish.yml
