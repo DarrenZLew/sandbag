@@ -9,6 +9,7 @@ jobs:
   build:
     name: 'Bump version and commit package.json'
     runs-on: ubuntu-latest
+    environment: production
     if: |
       github.event.pull_request.merged == true
     steps:
